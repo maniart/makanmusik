@@ -1,54 +1,36 @@
 var app = (function(w, d, $){
-	
-	Object.size = function(obj) {
-	    var size = 0, key;
-	    for (key in obj) {
-	        if (obj.hasOwnProperty(key)) size++;
-	    }
-	    return size;
-    };
-	
 	'use strict';
 	
 	// private 
 	var prvt = {},
 		pub = {},
 		that = this;
+		
 				
 	prvt.$dom = {};
 	prvt.$dom.body = $('body');
-	prvt.$dom.loadContent = $('.load-content');
+	prvt.$dom.container = $('.container');
+	prvt.template = $('<div class="post"><h3 class="title"></h3><div class="content"></div></div>');
 	
-	prvt.processData = function processData(data) {
-		$(data).each(function(index, element){
-			var posts = data["posts"];
-			
-			for(var i=0; i<posts.length; ++i){
-				
-			
-			$('body').append('<h1>'+posts[i].title+'</h1>')
-				
-			}
-			console.log(index, element);
-		});	
-	};
-	
-	pub.init = function(w, d) {
-			
-		
-		prvt.$dom.loadContent.on('click', function(e) {
-			e.preventDefault();
-			$.ajax({
-				url: 'http://makanmusik.com/?json=1',
-				context: document.body,	
-			}).done(function() {
-				$(this).addClass('ajax-req-complete');
-			}).success(function(data, textStatus, jqXHR) {
-
-				prvt.processData(data);
-				
+	pub.init = function() {		
+		$.getJSON('http://makanmusik.com/?json=1')
+		.done(function(data) {
+			var $posts = $(data.posts);
+			console.log($posts);
+			$posts.each(function(index, item) {
+				var template = prvt.template.clone(true),
+					title = template.find('.title'),
+					content = template.find('.content'); 
+				title.text(item['title']);
+				content.html(item['excerpt']);
+				prvt.$dom.container.append(template);				
 			});
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textSTatus + ', ' + error;
+			console.log('Request Failed: ' + err);
 		});
+		
 	};
 		
 	return pub;
