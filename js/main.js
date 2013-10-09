@@ -10,9 +10,14 @@ var app = (function(w, d, $){
 	var template,
 	compiledTemplate,
 	
+	pathTo = function(pathFromThemeRoot) {
+		var basePath = 'wp-content/themes/makanmusik/';
+		return 	basePath + pathFromThemeRoot;
+	},
+	
 	fetchTemplate = function() {
 		$.ajax({
-			url: '../templates/tracks.handlebars',
+			url: pathTo('templates/tracks.handlebars'),
 			type: 'POST',
 			dataType: 'text'	
 		})
@@ -30,13 +35,16 @@ var app = (function(w, d, $){
 	
 	render = function() {		
 		console.log('render');
-		$.getJSON('http://makanmusik.com/?json=get_recent_posts&post_type=tracks')
+		$.ajax({
+			url: 'api/get_posts/?post_type=tracks',
+			type: 'POST',
+			dataType: 'json'	
+		})
 		.done(function(data) {
 			console.log(data);
 			var context = data;
 			$DOM.ajaxLoader.fadeOut(200);
 			$DOM.container.html(compiledTemplate({ posts : context.posts }));
-			//$DOM.container.append(compiledTemplate(data));
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textSTatus + ', ' + error;

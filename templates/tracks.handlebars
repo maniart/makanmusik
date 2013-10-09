@@ -1,9 +1,9 @@
 {{#posts}}
-<article class="post">
+<article class="track">
 	<header>
 		<h1 class="title">{{title}}</h1>
 	</header>
-	{{custom_fields.wpcf-description}}
+	{{{custom_fields.wpcf-track-description}}}
 	<audio src="{{custom_fields.wpcf-track-file}}" preload="auto" controls></audio>
 </article>
 {{/posts}}
