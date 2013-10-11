@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-	<?php $themePath = 'wp-content/themes/makanmusik/'; ?>
+	<?php $themePath = 'http://makanmusik.com/wp-content/themes/makanmusik/'; ?>
 	<head>
 		<script type="text/x-handlebars-template" src="<?php echo $themePath."js/templates/tracks.js"?>"></script>
 		<script type="text/javascript" src="<?php echo $themePath."js/vendor/handlebars.js"?>"></script>
@@ -8,6 +8,12 @@
 		<title>Makan Ashgvari : Musician</title>
 	</head>
 	<body>	
+		<ul>
+			<li><a href="/#music">music</a></li>
+			<li><a href="/#video">videos</a></li>
+			<li><a href="/#news">news</a></li>
+			<li><a href="/#about">about</a></li>
+		</ul>
 		<div class="ajax-loader">
 		</div>
 		<div class="container">

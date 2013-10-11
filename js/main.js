@@ -11,8 +11,38 @@ var app = (function(w, d, $){
 	compiledTemplate,
 	
 	pathTo = function(pathFromThemeRoot) {
-		var basePath = 'wp-content/themes/makanmusik/';
+		var basePath = 'http://makanmusik.com/wp-content/themes/makanmusik/';
 		return 	basePath + pathFromThemeRoot;
+	},
+	
+	router = function() {
+		var hash = w.location.hash.slice(1);
+		switch(hash) {
+			case 'music':
+				// route to music section
+				console.log('loading music');
+			break;
+			case 'video':
+				// route to video section
+				console.log('loading video');
+			break;
+			case 'news':
+				// route to news
+				console.log('loading news');
+			break;
+			case 'contact':
+				// route to contact
+				console.log('loading contact');
+			break;
+			case 'about':
+				// route to about
+				console.log('loading about');
+			break;
+			default:
+				// route to home
+				console.log('default to home');
+			break;	
+		} 		
 	},
 	
 	fetchTemplate = function() {
@@ -53,7 +83,16 @@ var app = (function(w, d, $){
 		
 	},
 	
+	attachEvents = function() {
+		w.addEventListener('hashchange', function() {
+			console.log('hash just changed');	
+			router();
+		});
+	},
+	
 	init = function() {
+		attachEvents();
+		router();
 		fetchTemplate();
 		$(d).on('templateLoaded', function() {
 			render();
