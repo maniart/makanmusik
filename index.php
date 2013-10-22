@@ -1,7 +1,8 @@
+
 <!doctype html>
 <html>
-	<?php $themePath = 'http://makanmusik.com/wp-content/themes/makanmusik/'; ?>
 	<head>
+		<?php $themePath = 'http://makanmusik.com/wp-content/themes/makanmusik/'; ?>
 		<script type="text/x-handlebars-template" src="<?php echo $themePath."js/templates/tracks.js"?>"></script>
 		<script type="text/javascript" src="<?php echo $themePath."js/vendor/handlebars.js"?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo $themePath."style.css"?>">
